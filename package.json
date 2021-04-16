@@ -3,6 +3,7 @@
   "displayName": "int-arch-tutorials",
   "description": "",
   "publisher": "kohies",
+  "repository": {},
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.46.0"
