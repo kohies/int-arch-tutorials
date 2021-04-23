@@ -1,12 +1,15 @@
 # Welcome to Int-Arch-Code
 
-You can start a Tutorial by hovering over it in the bottom of the Explorer and clicking the little play button next to it.
+In this series of lessons, you will be presented with architectural problems in a given codebase.
+The application, which you will be improving a little bit each lesson, is calles *High Performance* and computes bonus salaries for vaccum cleaner salesmen.
 
-![Start a Tutorial](https://github.com/kohies/int-arch-code-resources/raw/master/didact-tutorials.png)
+Start a lesson by hovering over it in the tutorial section in the bottom of the Explorer-Panel and clicking the little play button next to it.
+
+![Start a Tutorial](https://github.com/kohies/int-arch-code-resources/raw/master/didact-tutorials.gif)
 
 You are working inside a Docker container, which is a virtual linux machine, with all the tools and dependencies that you need for these tutorials.
 
-If you want to disconnect from the container press Ctrl+Shift+P and then type "Close Remote Connection" and press Enter.
+If you want to pause your work, you can disconnect from the container by pressing Ctrl+Shift+P and then type "Close Remote Connection" and press Enter.
 
 ![Close the Connection](https://github.com/kohies/int-arch-code-resources/raw/master/close.png)
 
