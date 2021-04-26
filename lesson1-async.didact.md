@@ -214,4 +214,4 @@ Bonus: You can try out how well this scales by calling the REST-API of the CRM s
 
 ## Test your solution
 
-[open a new terminal](didact://?commandId=vscode.didact.startTerminalWithName&text=Tests), change the directory to [lesson1-async/high-performance](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$cd+lesson1-async/high-performance) and type [npm t tests/internalRatingsPerformance.test.ts](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$npm+t+tests/internalRatingPerformance.test.ts)
+[open a new terminal](didact://?commandId=vscode.didact.startTerminalWithName&text=Tests), change the directory to [lesson1-async/high-performance](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$cd+lesson1-async/high-performance) and type [npm t tests/internalRatingsPerformance.test.ts](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$npm+t+tests/internalRatingsPerformance.test.ts)
