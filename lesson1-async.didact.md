@@ -9,14 +9,14 @@ For example when a system calls a REST-API of another system in a synchronous fa
 In the meantime, there is nothing else the calling system can do. 
 The program is blocked.
 When calling a REST-API asynchronously, the calling system specifies, what should be done upon arrival of a response from the called system.
-It then continues processing instructions and comes back to the specified behaviour when it actually receives a response.
+It then continues processing instructions and comes back to the specified behavior when it actually receives a response.
 
 This is much more efficient.
 Imagine making breakfast and for every subtask you have to wait until it is completed, before starting the next one.
 You have to wait 8 minutes for the eggs to boil.
 After that you wait 2 minutes for the coffee to be brewed.
 You then wait 3 minutes for the bread to be toasted.
-It would take you a lot shorter, if you could make coffe while the eggs are boiling.
+It would take you a lot shorter, if you could make coffee while the eggs are boiling.
 
 In the image below, there is a sequence diagram of synchronous and asynchronous communication.
 
@@ -32,7 +32,7 @@ For the sake of simplicity, we are going to start out with a simple Javascript p
 Asynchronous communication can not only happen between whole systems, but also between functions.
 
 Open [playground.js](didact://?commandId=vscode.open&projectFilePath=lesson1-async/high-performance/playground.js) and follow along, in order to get a feeling for asynchronous communication.
-You can run your code in the [Debug Panel](didact://?commandId=workbench.view.debug) via the little green play button after selecting Playground via the dropdown menu at the top.
+Click [here](didact://?commandId=workbench.view.debug) to open the Debug Panel. Select *Lesson1: Playground* via the dropdown menu at the top, then click the little green play button next to it.
 
 Consider the built-in function `setTimeout(callback, ms)`.
 What it does is this: Wait for the specified amount of milliseconds and then call the specified function.
@@ -41,17 +41,17 @@ Read the following code, copy it over to playground.js and run it.
 ```
 let i = 1;
 
-function printAndIcrement() {
+function printAndIncrement() {
     console.log(i);
     i += 1;
 }
 
-setTimeout(printAndIcrement, 1000);
-setTimeout(printAndIcrement, 1000);
-setTimeout(printAndIcrement, 1000);
-setTimeout(printAndIcrement, 1000);
+setTimeout(printAndIncrement, 1000);
+setTimeout(printAndIncrement, 1000);
+setTimeout(printAndIncrement, 1000);
+setTimeout(printAndIncrement, 1000);
 ```
-[copy](didact://?commandId=vscode.didact.copyToClipboardCommand&text=let%20i%20%3D%201%3B%0A%0Afunction%20printAndIcrement()%20%7B%0A%20%20%20%20console.log(i)%3B%0A%20%20%20%20i%20%2B%3D%201%3B%0A%7D%0A%0AsetTimeout(printAndIcrement%2C%201000)%3B%0AsetTimeout(printAndIcrement%2C%201000)%3B%0AsetTimeout(printAndIcrement%2C%201000)%3B%0AsetTimeout(printAndIcrement%2C%201000)%3B)
+[COPY](didact://?commandId=vscode.didact.copyToClipboardCommand&text=let%20i%20%3D%201%3B%0A%0Afunction%20printAndIncrement()%20%7B%0A%20%20%20%20console.log(i)%3B%0A%20%20%20%20i%20%2B%3D%201%3B%0A%7D%0A%0AsetTimeout(printAndIncrement%2C%201000)%3B%0AsetTimeout(printAndIncrement%2C%201000)%3B%0AsetTimeout(printAndIncrement%2C%201000)%3B%0AsetTimeout(printAndIncrement%2C%201000)%3B)
 
 It behaves differently than we would at first naively think.
 It does not wait and print and increment and wait and print and increment.
@@ -61,20 +61,27 @@ It registers the first callback with a delay of one second and then immediately 
 
 If we want the program to do one thing after another, we would have to write it like this:
 ```
+let i = 1;
+
+function printAndIncrement() {
+    console.log(i);
+    i += 1;
+}
+
 setTimeout(() => {
-    printAndIcrement();
+    printAndIncrement();
     setTimeout(() => {
-        printAndIcrement();
+        printAndIncrement();
         setTimeout(() => {
-            printAndIcrement();
+            printAndIncrement();
             setTimeout(() => {
-                printAndIcrement();
+                printAndIncrement();
             }, 1000);
         }, 1000);
     }, 1000);
 }, 1000);
 ```
-[copy](didact://?commandId=vscode.didact.copyToClipboardCommand&text=setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20printAndIcrement()%3B%0A%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20printAndIcrement()%3B%0A%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20printAndIcrement()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20printAndIcrement()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%7D%2C%201000)%3B%0A%7D%2C%201000)%3B)
+[COPY](didact://?commandId=vscode.didact.copyToClipboardCommand&text=let%20i%20%3D%201%3B%0A%0Afunction%20printAndIncrement%28%29%20%7B%0A%20%20%20%20console.log%28i%29%3B%0A%20%20%20%20i%20%2B%3D%201%3B%0A%7D%0A%0AsetTimeout%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20printAndIncrement%28%29%3B%0A%20%20%20%20setTimeout%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20printAndIncrement%28%29%3B%0A%20%20%20%20%20%20%20%20setTimeout%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20printAndIncrement%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20setTimeout%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20printAndIncrement%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%201000%29%3B%0A%20%20%20%20%20%20%20%20%7D%2C%201000%29%3B%0A%20%20%20%20%7D%2C%201000%29%3B%0A%7D%2C%201000%29%3B)
 
 Now we pass a callback function to setTimeout, that prints and increments, and then calls setTimeout, which it passes another callback function, which in turn prints, increments and calls setTimeout with yet another callback function, that does the same, one more time.
 
@@ -87,7 +94,7 @@ This is where Promises enter the stage.
 A Promise is an object, which represents the completion of an asynchronous operation.
 A Promise can be either pending, fulfilled or rejected.
 To construct a Promise, we have to give it an executor function.
-Inside this function we write the logic, that determines wether a Promise is fullfilled or rejected.
+Inside this function we write the logic, that determines wether a Promise is fulfilled or rejected.
 The executor function takes two arguments, which are again functions.
 Let's call the first one `resolve` and the second one `reject`.
 These functions are generated by the Promise constructor and you can think of them as a way to mark the outcome of your executor function as successful or failed.
@@ -122,9 +129,9 @@ printAndIncrement()
 .then(sleep)
 .then(printAndIncrement)
 ```
-[copy](didact://?commandId=vscode.didact.copyToClipboardCommand&text=let%20i%20%3D%201%3B%0A%0Afunction%20printAndIncrement()%20%7B%0A%20%20%20%20return%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20console.log(i)%3B%0A%20%20%20%20%20%20%20%20i%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20resolve()%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A%0Afunction%20sleep()%20%7B%0A%20%20%20%20return%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20setTimeout(resolve%2C%201000)%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A%0AprintAndIncrement()%0A.then(sleep)%0A.then(printAndIncrement)%0A.then(sleep)%0A.then(printAndIncrement)%0A.then(sleep)%0A.then(printAndIncrement))
+[COPY](didact://?commandId=vscode.didact.copyToClipboardCommand&text=let%20i%20%3D%201%3B%0A%0Afunction%20printAndIncrement()%20%7B%0A%20%20%20%20return%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20console.log(i)%3B%0A%20%20%20%20%20%20%20%20i%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20resolve()%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A%0Afunction%20sleep()%20%7B%0A%20%20%20%20return%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20setTimeout(resolve%2C%201000)%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A%0AprintAndIncrement()%0A.then(sleep)%0A.then(printAndIncrement)%0A.then(sleep)%0A.then(printAndIncrement)%0A.then(sleep)%0A.then(printAndIncrement))
 
-The `printAndIncrement` function prints, increments and immedately resolves its Promise, signalling the next function in the chain that it is their turn now.
+The `printAndIncrement` function prints, increments and immediately resolves its Promise, signalling the next function in the chain that it is their turn now.
 The `sleep` function waits for one second before resolving the Promise.
 That way the next function in the chain is not called until after the second has passed.
 
@@ -134,7 +141,7 @@ The async/await syntax is syntactic sugar for Promises.
 It can make asynchronous code look synchronous.
 By putting the keyword `async` in front of a function, it automatically returns a Promise.
 With the keyword `await` you can wait for a Promise to be fulfilled.
-It can only be used inside async functions.
+`await` can only be used inside `async` functions.
 
 Our example with async/await looks like this:
 ```
@@ -164,7 +171,7 @@ async function main() {
 
 main();
 ```
-[copy](didact://?commandId=vscode.didact.copyToClipboardCommand&text=let%20i%20%3D%201%3B%0A%0Afunction%20printAndIncrement()%20%7B%0A%20%20%20%20console.log(i)%3B%0A%20%20%20%20i%20%2B%3D%201%3B%0A%7D%0A%0Afunction%20sleep()%20%7B%0A%20%20%20%20return%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20setTimeout(resolve%2C%201000)%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A%0Aasync%20function%20main()%20%7B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%7D%3B%0A%0Amain()%3B)
+[COPY](didact://?commandId=vscode.didact.copyToClipboardCommand&text=let%20i%20%3D%201%3B%0A%0Afunction%20printAndIncrement()%20%7B%0A%20%20%20%20console.log(i)%3B%0A%20%20%20%20i%20%2B%3D%201%3B%0A%7D%0A%0Afunction%20sleep()%20%7B%0A%20%20%20%20return%20new%20Promise((resolve%2C%20reject)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20setTimeout(resolve%2C%201000)%3B%0A%20%20%20%20%7D)%3B%0A%7D%0A%0Aasync%20function%20main()%20%7B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%20%20%20%20printAndIncrement()%3B%0A%20%20%20%20await%20sleep()%3B%0A%7D%3B%0A%0Amain()%3B)
 
 This is basically just an alternative syntax to the Promise chains using `then`.
 You can choose whichever one you like best, or whichever one makes your code look simplest.
@@ -177,9 +184,11 @@ It then logs those ratings, along with the time it took to retrieve them.
 [SalesmanService](didact://?commandId=vscode.open&projectFilePath=lesson1-async/high-performance/modules/core/server/services/salesman.service.ts) calls the REST-API of a Customer Relationship Management System, which is already running in the background.
 This system apparently takes around one second to come up with a response.
 
-Run our Application by the name of *High Performance* in the [Debug Panel](didact://?commandId=workbench.view.debug) via the little green play button after selecting *Lesson 1: High Performance*.
+Click [here](didact://?commandId=workbench.view.debug) to open the Debug Panel. Select *Lesson1: High Performance* via the dropdown menu at the top, then click the little green play button next to it. This will start the server application and open a Debug Console.
 
 Then send the request in [internalRatings.http](didact://?commandId=vscode.open&projectFilePath=lesson1-async/requests/internalRatings.http) by clicking *Send Request* at the top of the editor panel.
+![](send_request.png)
+
 You can have a look at the result on the Debug Console.
 
 It takes us around five seconds, to retrieve the internal ratings for five salesmen.
@@ -189,20 +198,20 @@ Let's say, it leaves some room for improvement.
 ## Architectural Change
 
 What's causing our problem here, is that we are actually not leveraging the power of asynchronous communication.
-Right now we are pretty much making synchronous requests to the Customer Realtionship Management system.
-We wan't to change our [SalesmanService](didact://?commandId=vscode.open&projectFilePath=lesson1-async/high-performance/modules/core/server/services/salesman.service.ts) to retrieve the internal ratings from the Customer Realtionship Management system asynchronously. 
+Right now we are pretty much making synchronous requests to the Customer Relationship Management system.
+We want to change our [SalesmanService](didact://?commandId=vscode.open&projectFilePath=lesson1-async/high-performance/modules/core/server/services/salesman.service.ts) to retrieve the internal ratings from the Customer Relationship Management system asynchronously. 
 
 ## Get Started!
 
 It is up to you to find out how to do that.
 The Tutorial in the beginning of this lesson should help you understand what is going on and what needs to be changed.
 
-**The goal is to get the time down two only around one second.**
+**The goal is to get the time down to only around one second.**
 
 Bonus: You can try out how well this scales by calling the REST-API of the CRM system a hundred times, a thousand times, etc.  
 
-**Here is a hint, in case you want to use async/await: You can collect Promises in an array and then get a single Promise that resolves to an array of values, when all of the collected ones have resolved by calling `Promise.all(arrayWithCollectedPromises)`.**
+**Hint: Instead of waiting for one Promise at a time, you can collect Promises in an array and then get a single Promise that resolves to an array of values, when all of the collected ones have resolved by calling `Promise.all(arrayWithCollectedPromises)`**
 
 ## Test your solution
 
-[open a new terminal](didact://?commandId=vscode.didact.startTerminalWithName&text=Tests), change the directory to [high-performance](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$cd+lesson1-async/high-performance) and type [npm t tests/internalRatingPerformance.test.ts](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$npm+t+tests/internalRatingPerformance.test.ts).
+[open a new terminal](didact://?commandId=vscode.didact.startTerminalWithName&text=Tests), change the directory to [lesson1-async/high-performance](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$cd+lesson1-async/high-performance) and type [npm t tests/internalRatingsPerformance.test.ts](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=Tests$$npm+t+tests/internalRatingPerformance.test.ts)
