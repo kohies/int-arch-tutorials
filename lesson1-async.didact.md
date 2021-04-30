@@ -186,7 +186,7 @@ This system apparently takes around one second to come up with a response.
 
 Click [here](didact://?commandId=workbench.view.debug) to open the Debug Panel. Select *Lesson1: High Performance* via the dropdown menu at the top, then click the little green play button next to it. This will start the server application and open a Debug Console.
 
-Then send the request in [internalRatings.http](didact://?commandId=vscode.open&projectFilePath=lesson1-async/requests/internalRatings.http) by clicking [here](didact://?commandId=rest-client.request&projectFilePath=lesson1-async/requests/internalRatings.http&error=Unsuccessful) or by clicking *Send Request* at the top of the editor panel.
+Then send the request in [internalRatings.http](didact://?commandId=vscode.open&projectFilePath=lesson1-async/requests/internalRatings.http) by clicking *Send Request* at the top of the editor panel.
 ![](send_request.png)
 
 You can have a look at the result on the Debug Console.
