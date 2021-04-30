@@ -24,7 +24,7 @@ In [saveSalesman.http](didact://?commandId=vscode.open&projectFilePath=lesson2-d
 
 Our application is structured the following way:
 
-![communication](./communication.svg)
+![communication](https://raw.githubusercontent.com/kohies/int-arch-tutorials/master/communication.svg)
 
 The database on the right stores data in a defined shape, a schema.
 It returns records in this shape and it expects new records to be sent in that shape.

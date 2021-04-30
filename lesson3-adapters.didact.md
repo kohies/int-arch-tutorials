@@ -55,11 +55,11 @@ In real-world systems this can lead to issues like our fictitious security probl
 This is where adapters come in handy.
 We can change our application from looking something like this:
 
-![without adapters](./without.svg)
+![without adapters](https://raw.githubusercontent.com/kohies/int-arch-tutorials/master/without.svg)
 
 to looking like this:
 
-![without adapters](./with.svg)
+![without adapters](https://raw.githubusercontent.com/kohies/int-arch-tutorials/master/with.svg)
 
 From now on, for every API change, the adapter can be modified in one central place.
 Our business logic will not require any changes at all.
