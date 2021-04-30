@@ -3,9 +3,13 @@
 In this series of lessons, you will be presented with architectural problems in a given codebase.
 The application, which you will be improving a little bit each lesson, is called *High Performance* and computes bonus salaries for vacuum cleaner salesmen.
 
-Start a lesson by hovering over it in the tutorial section in the bottom of the Explorer-Panel and clicking the little play button next to it.
+Start a lesson by clicking on one of the following links:
 
-![Start a Tutorial](https://github.com/kohies/int-arch-code-resources/raw/master/starttutorial.png)
+[Lesson 1: Asynchronous Communication](vscode://redhat.vscode-didact?https=raw.githubusercontent.com/kohies/int-arch-tutorials/master/lesson1-async.didact.md)
+
+[Lesson 2: Data Models](vscode://redhat.vscode-didact?https=raw.githubusercontent.com/kohies/int-arch-tutorials/master/lesson2-datamodels.didact.md)
+
+[Lesson 3: Adapters](vscode://redhat.vscode-didact?https=raw.githubusercontent.com/kohies/int-arch-tutorials/master/lesson3-adapters.didact.md)
 
 You are working inside a Docker container, which is a virtual linux machine, with all the tools and dependencies that you need for these tutorials.
 

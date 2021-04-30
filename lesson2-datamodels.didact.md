@@ -4,7 +4,7 @@ In this lesson you are going to learn how to reduce redundancy and complexity by
 
 ## Retrieving records from a database
 
-The Development Container you are connected to is running an instance of MongoDB in the background.
+The Development Container you are connected to is running an instance of MongoDB in the back  ground.
 This instance has a database called 'highPerformanceDb', which is what our high-performance application uses to store and retrieve data.
 So far inside this database there is only one collection, named 'salesmen'.
 
@@ -46,7 +46,7 @@ We need some mechanism that guarantees us beforehand what a salesman object look
 It becomes even more obvious in line 31 of the [controller](didact://?commandId=vscode.open&projectFilePath=lesson2-datamodels/high-performance/modules/core/server/controllers/salesman.controller.ts):
 ``logger.info(`Retrieved salesman ${salesman['_id']} from database.`);``  
 The Typescript compiler won't even let us use the *dot property accessor* `salesman._id` because it does not know wether salesman has this property.
-Instead we are forced to use the *square bracket property accessor* `salesman['_id']`, because the existance of the property can only be determined at runtime.
+Instead we are forced to use the *square bracket property accessor* `salesman['_id']`, because the existence of the property can only be determined at runtime.
 Imagine having to refactor a property name in a codebase like this.
 
 When saving new salesmen to the database we want to be able to use a constructor to create an object, which can then be sent to the database, instead of waiting for the database validation to tell us if the user input is well shaped.

@@ -5,7 +5,7 @@ In this lesson you are going to learn about why it is good to encapsulate third-
 ## Mocking Third-Party Systems
 
 The third-party systems we are trying to communicate with are a human resource management system and a customer relationship management system.
-They could for expample be located on a company server or in a cloud somewhere off-premise.
+They could for example be located on a company server or in a cloud somewhere off-premise.
 Instead of using the real thing, here we will work with mock applications. In our case these are just two small apps that provide REST-APIs similar to the ones the real systems would provide.
 This would for example also be done for testing functionality on the developer's machine, when we don't want to mess up 
 the real systems. The two mock systems are already running in the background.
@@ -13,7 +13,7 @@ the real systems. The two mock systems are already running in the background.
 You can send Http-Requests to the app from inside the IDE. We prepared one for you that searches for employees named Smith.
 Just open the file [employeeSearch.http](didact://?commandId=vscode.open&projectFilePath=lesson3-adapters/requests/employeeSearch.http) and click on the little 'Send Request' button above the Request. A new window will open, that shows the Http-Response, with the JSON data for two employees named Smith. Try changing the search string to 'Sallinger' and rerun the request.
 
-We added another request in the file [bonusSalary.http](didact://?commandId=vscode.open&projectFilePath=lesson3-adapters/requests/bonusSalary.http). What is the biggest difference between the two? Try to send this request and see how the HRM mock app responds.
+We added another request in the file [bonusSalary.http](didact://?commandId=vscode.open&projectFilePath=lesson3-adapters/requests/bonusSalary.http). What is the biggest difference between the two? Try to send this request and see how the HRM app responds.
 
 Try creating a new .http file and sending a GET Request to `http://localhost:8082/salesOrders` with the query parameter `salesRepId=JSS17`
 
@@ -47,8 +47,8 @@ You have to insert the token, that you get from the first request into the secon
 
 In order to fix our high-performance application, we already have to modify it in four places now.
 Still less trouble than changing the architecture, you say?
-The problem we are facing can soon become an even bigger problem, as more and more of our business logic code becomes dependend on third-party APIs.
-In real-world systems this can lead to issues like our fictious security problem not being fixed at all.
+The problem we are facing can soon become an even bigger problem, as more and more of our business logic code becomes dependent on third-party APIs.
+In real-world systems this can lead to issues like our fictitious security problem not being fixed at all.
 
 ## Architectural Change
 
